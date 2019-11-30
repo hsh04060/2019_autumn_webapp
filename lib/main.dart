@@ -10,6 +10,7 @@ import 'package:untitled3/src/islogin.dart';
 import 'package:untitled3/src/notice.dart';
 import 'package:untitled3/src/startpage.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase/firebase.dart' as fb;
 
 
 
@@ -20,6 +21,17 @@ FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
 void main() async {
   flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  assert(() {
+    fb.initializeApp(
+        apiKey: "AIzaSyDURYgJbUmKTcZ0gY5LUitEyUKGiOH1OCE",
+        authDomain: "selab-2760b.firebaseapp.com",
+        databaseURL: "https://selab-2760b.firebaseio.com",
+        projectId: "selab-2760b",
+        storageBucket: "selab-2760b.appspot.com",
+        messagingSenderId: "205718891635",
+    );
+    return true;
+  }());
   runApp(
       MyApp()
   );
