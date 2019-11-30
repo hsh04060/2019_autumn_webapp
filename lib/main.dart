@@ -6,14 +6,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
-import 'package:untitled3/src/addnotice.dart';
-import 'package:untitled3/src/islogin.dart';
-import 'package:untitled3/src/notice.dart';
-import 'package:untitled3/src/startpage.dart';
+import 'package:untitled3/src/home/labHome.dart';
+import 'package:untitled3/src/home/addnotice.dart';
+import 'package:untitled3/src/grade/grade.dart';
+import 'package:untitled3/src/home/home.dart';
+import 'package:untitled3/src/sign/islogin.dart';
+import 'package:untitled3/src/home/notice.dart';
+import 'package:untitled3/src/quiz/quiz.dart';
+import 'package:untitled3/src/etc/startpage.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:device_id/device_id.dart';
 
+const bool kIsWeb = identical(0, 0.0);
 
 
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
@@ -23,7 +28,6 @@ FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
 void main() async {
   flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
   runApp(MyApp());
 }
 
@@ -48,8 +52,9 @@ class _MyAppState extends State<MyApp> {
         initializationSettingsAndroid, initializationSettingsIOS);
     flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onSelectNotification: onSelectNotification);
-
-    firebaseCloudMessaging_Listeners(); // firebase message
+    if(!kIsWeb){
+      firebaseCloudMessaging_Listeners(); // firebase message
+    }
   }
 
   @override
@@ -60,10 +65,11 @@ class _MyAppState extends State<MyApp> {
       builder: (_)=> Counter(),
       child: MaterialApp(
         theme: ThemeData(
-          brightness:Brightness.dark,
+//          primaryColor: Colors.white,
+          brightness: Brightness.dark
         ),
         title: "Hello",
-        home: StartUp(),
+        home: MyHomePage(),
       ),
     );
   }
@@ -103,9 +109,6 @@ class _MyAppState extends State<MyApp> {
   void firebaseCloudMessaging_Listeners() async{
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
 
-//    if(db.collection('device').snapshots()){
-
-//    }
     db.document('device');
     if (Platform.isIOS) {
       iOS_Permission();
@@ -169,4 +172,70 @@ class _MyAppState extends State<MyApp> {
         0, 'SElab 공지사항', body, platformChannelSpecifics,
         payload: 'item x');
   }
+}
+
+
+class MyHomePage extends StatefulWidget {
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+
+
+  @override
+  Widget build(BuildContext context) {
+//    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+//      statusBarColor: Colors.black
+//    ));
+
+    return Scaffold(
+
+//      endDrawer: MenuBar(),
+      body:_widgetOptions.elementAt(_selectedIndex),
+      bottomNavigationBar: bottomBar(),
+
+    );
+  }
+
+
+  Widget bottomBar(){
+    return BottomNavigationBar(
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          title: Text('HOME'),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.grade),
+          title: Text('GRADE'),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.question_answer),
+          title: Text('QUIZ'),
+        ),
+
+      ],
+      selectedItemColor: Colors.orangeAccent,
+      currentIndex: _selectedIndex,
+      onTap: _onItemTapped,
+      unselectedItemColor: Colors.white,
+    );
+  }
+  int _selectedIndex = 0;
+  static List<Widget> _widgetOptions = <Widget>[
+    new Home(),
+    new BarChartSample1(),
+    new Quiz()
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+
+
 }

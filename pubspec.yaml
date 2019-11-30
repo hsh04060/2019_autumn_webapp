@@ -7,12 +7,14 @@ environment:
   sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
+  polygon_clipper: ^1.0.2
   cloud_firestore:
   url_launcher: ^4.0.3
   firebase_auth: ^0.14.0+5
   flutter_local_notifications: ^0.8.4
   google_sign_in: ^4.0.11
   provider: ^2.0.0+1
+  fl_chart: ^0.4.2
   flutter:
     sdk: flutter
   google_maps_flutter: ^0.5.11
@@ -24,6 +26,8 @@ dependencies:
   firebase: ^7.0.0
   firebase_messaging:
   device_info:
+  date_format:
+  flutter_datetime_picker: ^1.2.8
 
 dev_dependencies:
   flutter_test:
@@ -37,6 +41,16 @@ flutter:
   uses-material-design: true
   assets:
     - images/
+
+  fonts:
+    - family: Raleway
+      fonts:
+        - asset: fonts/Raleway/Raleway-ExtraLight.ttf
+        - asset: fonts/Raleway/Raleway-ExtraBold.ttf
+        - asset: fonts/Raleway/Raleway-Bold.ttf
+        - asset: fonts/Raleway/Raleway-Black.ttf
+          weight : 400
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg
