@@ -307,7 +307,6 @@ class About extends StatelessWidget {
 //        rotate: 90.0,
         // Default 0.0 degrees
         boxShadows: [
-
           PolygonBoxShadow(color: Colors.orangeAccent, elevation: 5),
           PolygonBoxShadow(color: Colors.orangeAccent, elevation: 5,),
 

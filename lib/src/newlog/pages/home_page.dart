@@ -111,20 +111,21 @@ class _HomePageState extends State<HomePage> {
         return AlertDialog(
           title: new Text("Verify your account"),
           content: new Text("Please verify account in the link sent to email"),
+
           actions: <Widget>[
             new FlatButton(
               child: new Text("Resent link"),
               onPressed: () {
-                Navigator.of(context).pop();
+//                Navigator.of(context).pop();
                 _resentVerifyEmail();
               },
             ),
-            new FlatButton(
-              child: new Text("Dismiss"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
+//            new FlatButton(
+//              child: new Text("Dismiss"),
+//              onPressed: () {
+//                Navigator.of(context).pop();
+//              },
+//            ),
           ],
         );
       },
