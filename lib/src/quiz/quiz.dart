@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled3/src/quiz/addQuiz.dart';
+import 'package:untitled3/src/quiz/leaderBoard.dart';
 import 'package:untitled3/src/sign/islogin.dart';
 
 class Quiz extends StatefulWidget {
@@ -60,6 +61,13 @@ class _QuizState extends State<Quiz> {
           )
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LeaderBoard()));
+        },
+        backgroundColor: Colors.white30,
+        child: Icon(Icons.school,color: Colors.white,),
+      ),
       body: getQuiz(),
     );
   }
@@ -107,7 +115,7 @@ class _QuizState extends State<Quiz> {
                       textScaleFactor: 3,
                     ),
                     Text("Answerer is " +
-                        snapshot.data.documents[0]['Winner is'][0])
+                        snapshot.data.documents[0]['answerer'][0])
                   ],
                 ),
               );
@@ -184,7 +192,7 @@ class _QuizState extends State<Quiz> {
         child: RaisedButton(
           onPressed: () async {
             if (_formKey.currentState.validate()) {
-              answerer.add("aldehf420@naver.com");
+              answerer.add("aldehf420@gmail.com");
               await Firestore.instance
                   .collection('quiz')
                   .document(document.documentID)
@@ -278,7 +286,7 @@ class _QuizState extends State<Quiz> {
               ? null
               : () async {
                   if (!isSubmit && _selectNum == document['answer']) {
-                    answerer.add("aldehf420@naver.com");
+                    answerer.add("aldehf420@gmail.com");
                     await Firestore.instance
                         .collection('quiz')
                         .document(document.documentID)
