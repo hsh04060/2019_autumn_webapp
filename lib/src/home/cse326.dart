@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class WebApplicationDevelopment extends StatelessWidget {
+class CSE326 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Set dbSet = {
@@ -25,11 +25,22 @@ class WebApplicationDevelopment extends StatelessWidget {
     final Set dbSet2 = {"lecture", "lab"};
     final List dbList2 = dbSet2.toList();
     final _kTabPages = <Widget>[
-      Card(
-        child: Image.asset('images/picture.png'),
-        margin: EdgeInsets.all(10),
-        color: Colors.black12,
+      ListView(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.only(top: 10,bottom: 10),
+            width: MediaQuery.of(context).size.width,
+            child: Image.asset('images/courses.png'),
+            margin: EdgeInsets.all(10),
+
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              color: Colors.black38,
+            ),
+          ),
+        ],
       ),
+
       StreamBuilder(
         // This is HOME Tab
         stream:
@@ -71,7 +82,6 @@ class WebApplicationDevelopment extends StatelessWidget {
           ),
         ),
         body: TabBarView(
-
           children: _kTabPages,
         ),
       ),
@@ -165,7 +175,7 @@ Widget _buildListItem2(
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    Text(gridState[i][0]),
+                    Text(gridState[i][0],textScaleFactor: 0.9,),
                   ],
 //              mainAxisAlignment: MainAxisAlignment.center,
 //                crossAxisAlignment: CrossAxisAlignment.center,
@@ -231,7 +241,7 @@ Widget _buildListItem2(
                             textAlign: TextAlign.center,
                           ),
                         ),
-                        Text(gridState[i][0]),
+                        Text(gridState[i][0],textScaleFactor: 0.9,),
                       ],
 //              mainAxisAlignment: MainAxisAlignment.center,
 //                crossAxisAlignment: CrossAxisAlignment.center,

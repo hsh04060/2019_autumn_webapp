@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expandable/expandable.dart';
 import 'package:provider/provider.dart';
-import 'package:untitled3/src/sign/islogin.dart';
+import 'package:untitled3/src/signInOut/islogin.dart';
 
 import 'addnotice.dart';
 
@@ -19,14 +19,14 @@ class Notice extends StatelessWidget {
         centerTitle: true,
         title: Container(height:100,child: Image.asset('images/logo.png')),
         actions: <Widget>[
-          counter.getCounter()==0?
-          Container():IconButton(
+          counter.getCounter()==2?
+          IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => AddNotice()));
             },
-          )
+          ):Text('')
         ],
       ),
       body: StreamBuilder(

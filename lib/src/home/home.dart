@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:untitled3/src/home/contact.dart';
 import 'package:untitled3/src/home/course.dart';
 import 'package:untitled3/src/home/labHome.dart';
@@ -7,6 +10,10 @@ import 'package:untitled3/src/home/members.dart';
 import 'package:untitled3/src/home/gallery.dart';
 import 'package:untitled3/src/home/about.dart';
 import 'package:untitled3/src/home/publication.dart';
+import 'package:untitled3/src/signInOut/login_signup_page.dart';
+import 'package:untitled3/src/signInOut/root_page.dart';
+import 'package:untitled3/src/signInOut/authentication.dart';
+import 'package:untitled3/src/signInOut/islogin.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -16,8 +23,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+//  final BaseAuth auth;
+//  final VoidCallback onSignedOut;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
+    final counter = Provider.of<Counter>(context);
     final _kTabPages = <Widget>[
       LabHome(),
       About(),
@@ -55,6 +67,22 @@ class _HomeState extends State<Home> {
                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Contact()));
           },),
           elevation: 0,
+          actions: <Widget>[
+            counter.getCounter() == 0
+                ? IconButton(
+                    icon: Icon(Icons.person),
+                    onPressed: () =>
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => RootPage(auth: Auth())))
+                    ,
+                  )
+                : IconButton(
+                    icon: Icon(Icons.person_outline),
+                    onPressed: () =>
+                      _showDialog(context)
+                    ,
+                  )
+          ],
           bottom: TabBar(
             indicatorColor: Colors.orangeAccent,
             unselectedLabelColor: Colors.white54,
@@ -69,5 +97,38 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-}
 
+  void _showDialog(BuildContext context) {
+    final counter = Provider.of<Counter>(context);
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return CupertinoAlertDialog(
+          title: new Text("Alert"),
+          content: new Text("Do you want Sign Out?"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Confirm"),
+              onPressed: () async {
+                counter.decrement();
+                _firebaseAuth.signOut();
+                Navigator.of(context).pop();
+              },
+              textColor: Colors.blue,
+            ),
+            new FlatButton(
+              child: new Text("Cancel"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              textColor: Colors.red,
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
