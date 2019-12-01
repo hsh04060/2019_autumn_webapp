@@ -16,7 +16,7 @@ class ShowPublication extends StatelessWidget {
       ),
       body: StreamBuilder(
         stream : Firestore.instance
-            .collection('$category')
+            .collection("$category")
             .orderBy('year')
             .snapshots(),
         builder: (context,snapshot){

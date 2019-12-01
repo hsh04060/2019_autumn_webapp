@@ -28,8 +28,32 @@ FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
 void main() async {
   flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-  runApp(MyApp());
+  if(kIsWeb) {
+    runApp(MyWebApp());
+  }
+  else{
+    runApp(MyApp());
+  }
 }
+
+class MyWebApp extends StatefulWidget {
+  @override
+  _MyWebAppState createState() => _MyWebAppState();
+}
+
+class _MyWebAppState extends State<MyWebApp> {
+  @override
+  Widget build(BuildContext context) {
+  return MaterialApp(
+    title: 'selab',
+    theme: ThemeData(
+    brightness: Brightness.dark
+    ),
+    home: MyHomePage()
+    );
+  }
+}
+
 
 class MyApp extends StatefulWidget {
   @override
