@@ -184,6 +184,8 @@ class BarChartSample1State extends State<BarChartSample1> {
   }
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
+
+
     a = double.parse(document['grade_absent'].toString());
     b = double.parse(document['grade_mid'].toString());
     c = double.parse(document['grade_final'].toString());
@@ -192,9 +194,10 @@ class BarChartSample1State extends State<BarChartSample1> {
     double total = (16 - a) * 10 / 16 + b + c + d + e;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         Container(
-            margin: EdgeInsets.all(10),
+            margin: EdgeInsets.all(0),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.black38,
@@ -211,6 +214,7 @@ class BarChartSample1State extends State<BarChartSample1> {
         AspectRatio(
           aspectRatio: 1,
           child: Container(
+
             margin: EdgeInsets.only(bottom: 10,right: 10,left: 10),
             child: Card(
               shape: RoundedRectangleBorder(
@@ -414,7 +418,6 @@ class BarChartSample1State extends State<BarChartSample1> {
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
             margin: 15,
             getTitles: (double value) {
-              print("check");
               switch (value.toInt()) {
                 case 0:
                   return 'Attendance\n' + (10 - a).toString();
