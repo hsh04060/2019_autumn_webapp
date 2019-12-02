@@ -42,12 +42,16 @@ class MyWebApp extends StatefulWidget {
 class _MyWebAppState extends State<MyWebApp> {
   @override
   Widget build(BuildContext context) {
-  return MaterialApp(
-    title: 'selab',
-    theme: ThemeData(
-    brightness: Brightness.dark
-    ),
-    home: MyHomePage()
+    return ChangeNotifierProvider(
+      builder: (_)=> Counter(),
+      child: MaterialApp(
+        theme: ThemeData(
+//          primaryColor: Colors.white,
+            brightness: Brightness.dark
+        ),
+        title: "Hello",
+        home: MyHomePage(),
+      ),
     );
   }
 }

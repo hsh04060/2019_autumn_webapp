@@ -18,6 +18,8 @@ class Members extends StatelessWidget {
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) return new Text('Error : ${snapshot.error}');
             switch (snapshot.connectionState) {
+              case ConnectionState.none:
+                return new Text('Fail to loading');
               case ConnectionState.waiting:
                 return new Text('Loading...');
               default:

@@ -2,10 +2,10 @@
 
 var admin = require("firebase-admin");
 
-var serviceAccount = require("path/to/serviceAccountKey.json");
+//var serviceAccount = require("path/to/serviceAccountKey.json");
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  //credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://selab-2760b.firebaseio.com",
   databaseAuthVariableOverride : null
 });
@@ -31,7 +31,7 @@ require("firebase/firestore");
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
-exports.helloWorld = functions.https.onRequest((request, response) => {
- response.send("Hello from Firebase!");
-});
+// exports.helloWorld = functions.https.onRequest((request, response) => {
+//  response.send("Hello from Firebase!");
+// });
 
